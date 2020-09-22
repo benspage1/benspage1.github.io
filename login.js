@@ -10,6 +10,8 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+var google_provider = new firebase.auth.GoogleAuthProvider();
+
 firebase.auth().onAuthStateChanged(user => {
   if (!!user){
     alert(`${user.displayName || user.email}`);
@@ -22,6 +24,9 @@ $("#loginemail").click(()=>{
     var errorMessage = error.message;
     alert(errorMessage);
   });
+});
+$("#google").click(()=>{
+  firebase.auth().signInWithRedirect(google_provider);
 });
 $("#register").click(()=>{
   let pwd1 = $("#password2").val();
